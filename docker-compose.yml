@@ -1,0 +1,36 @@
+version: "3.7"
+   
+services:
+  dm_db:
+    image: postgres:10.1-alpine
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+      # - .:/code
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin
+  django:
+    container_name: MobileApi    
+    build:
+      context: ./
+      dockerfile: Dockerfile
+      # command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    # command: bash -c "python /code/manage.py migrate --noinput && 
+            # python /code/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    # ports:
+      # - 8000:8000
+    depends_on:
+      - dm_db
+      # - nginx
+  nginx:
+    build: ./nginx
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+volumes:
+  pg_data:
