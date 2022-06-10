@@ -28,14 +28,9 @@ services:
   nginx:
     build: ./nginx
     image: nginx:stable-alpine
-    restart: on-failure
     ports:
-      - "80:80"
+      - "8000:80"
     depends_on:
       - django
-    volumes:
-      - ./static:/static
-      - ./media:/media
 volumes:
   pg_data:
-  static:
