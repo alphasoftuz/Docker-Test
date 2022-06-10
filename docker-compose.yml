@@ -32,5 +32,8 @@ services:
       - "80:80"
     depends_on:
       - django
+    volumes:
+      - ./static:/static
+      - ./media:/media
 volumes:
   pg_data:
