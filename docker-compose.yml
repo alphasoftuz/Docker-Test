@@ -21,7 +21,7 @@ services:
     volumes:
       - .:/code
     # ports:
-      # - 8000:8000
+    #   - 8000:8000
     depends_on:
       - dm_db
       # - nginx
@@ -30,7 +30,7 @@ services:
     image: nginx:stable-alpine
     restart: on-failure
     ports:
-      - "8000:8000"
+      - "80:80"
     depends_on:
       - django
     volumes:
