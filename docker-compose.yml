@@ -28,6 +28,7 @@ services:
   nginx:
     build: ./nginx
     image: nginx:stable-alpine
+    restart: on-failure
     ports:
       - "80:80"
     depends_on:
