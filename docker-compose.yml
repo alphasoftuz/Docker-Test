@@ -30,11 +30,11 @@ services:
     image: nginx:stable-alpine
     restart: on-failure
     ports:
-      - "80:8000"
+      - "8000:8000"
     depends_on:
       - django
     volumes:
-      - ./static:/static
-      - ./media:/media
+      - static: /static
+      - media: /media
 volumes:
   pg_data:
